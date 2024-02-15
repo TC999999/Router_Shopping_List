@@ -6,12 +6,15 @@ let baseURL = "http://localhost:3000/api/items";
 
 async function fillList() {
   let res = await axios.get(baseURL);
-  console.log(res.data.items);
   if (res.data.items.length !== 0) {
-    console.log("full list");
     for (let item of res.data.items) {
-      let $newItem = $("<li>");
-      $newItem.text(`${item.name} - $${item.price}`);
+      let $newUpdateButton = $('<button id="patch">').text("update item");
+      let $newDelButton = $('<button id="delete">').text("delete item");
+      let $newItem = $(`<li item_name=${item.name}>`).text(
+        `${item.name} - $${item.price}`
+      );
+      $newItem.append($newDelButton);
+      $newItem.append($newUpdateButton);
       $shoppingList.append($newItem);
     }
   }

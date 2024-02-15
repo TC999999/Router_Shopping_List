@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
 const itemAPIRoutes = require("./routes/itemsAPI");
-const itemRoutes = require("./routes/items");
+// const itemRoutes = require("./routes/items");
 const ExpressError = require("./expressError");
 
 app.use(express.json());
-app.use(express.static("public"));
-app.use("/items", itemRoutes);
 app.use("/api/items", itemAPIRoutes);
+// app.use("/items", itemRoutes);
+app.use(express.static("public"));
 
 //404 handler
 
