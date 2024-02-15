@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping List</title>
+  </head>
+  <body>
+    <h1>Shopping List</h1>
+    <div id="form_div">
+      <form action="/items" method="POST" id="add_item_form">
+        <label for="item_name">Name: </label>
+        <input type="text" id="item_name" name="item_name" />
+        <label for="item_price">Price: </label>
+        <input type="text" id="item_price" name="item_price" />
+        <button type="submit" id="add_item_button">Add Item</button>
+      </form>
+    </div>
+    <div class="shooping_list_div">
+      <ul id="shopping_list"></ul>
+    </div>
+  </body>
+</html>

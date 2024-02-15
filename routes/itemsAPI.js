@@ -5,7 +5,7 @@ const ExpressError = require("../expressError");
 global.items = middleware.readList();
 
 router.get("/", function (req, res) {
-  res.sendFile(__dirname + "/index.html");
+  res.json({ items });
 });
 
 router.get("/:name", function (req, res) {

@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
+const itemAPIRoutes = require("./routes/itemsAPI");
 const itemRoutes = require("./routes/items");
 const ExpressError = require("./expressError");
 
 app.use(express.json());
 app.use("/items", itemRoutes);
+app.use("/items/api", itemAPIRoutes);
 
 //404 handler
 
