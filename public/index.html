@@ -8,16 +8,19 @@
   <body>
     <h1>Shopping List</h1>
     <div id="form_div">
-      <form action="/items" method="POST" id="add_item_form">
+      <form action="#" method="POST" id="add_item_form">
         <label for="item_name">Name: </label>
-        <input type="text" id="item_name" name="item_name" />
+        <input type="text" id="item_name" name="item_name" required />
         <label for="item_price">Price: </label>
-        <input type="text" id="item_price" name="item_price" />
+        <input type="text" id="item_price" name="item_price" required />
         <button type="submit" id="add_item_button">Add Item</button>
       </form>
     </div>
     <div class="shooping_list_div">
       <ul id="shopping_list"></ul>
     </div>
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="requests.js"></script>
   </body>
 </html>

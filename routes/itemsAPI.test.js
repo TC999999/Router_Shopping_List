@@ -19,9 +19,9 @@ afterEach(function () {
   middleware.writeList(items);
 });
 
-describe("GET /items/api", () => {
+describe("GET /api/items", () => {
   test("Get all items", async () => {
-    const res = await request(app).get("/items/api");
+    const res = await request(app).get("/api/items");
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual({ items: [pickles] });
   });
@@ -29,12 +29,12 @@ describe("GET /items/api", () => {
 
 describe("GET /items/api/:name", () => {
   test("Get item by name", async () => {
-    const res = await request(app).get(`/items/api/${pickles.name}`);
+    const res = await request(app).get(`/api/items/${pickles.name}`);
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual(pickles);
   });
   test("Responds with 404 for getting invalid name", async () => {
-    const res = await request(app).get("/items/api/cookies");
+    const res = await request(app).get("/api/items/cookies");
     expect(res.statusCode).toBe(404);
     expect(res.body).toEqual({ error: "Item not found" });
   });
@@ -43,23 +43,23 @@ describe("GET /items/api/:name", () => {
 describe("POST /items/api", () => {
   test("Creating an item", async () => {
     const res = await request(app)
-      .post("/items/api")
+      .post("/api/items")
       .send({ name: "milk", price: "9.99" });
     expect(res.statusCode).toBe(201);
     expect(res.body).toEqual({ added: { name: "milk", price: "9.99" } });
   });
   test("Responds with 400 if only name is missing", async () => {
-    const res = await request(app).post("/items/api").send({ name: "apple" });
+    const res = await request(app).post("/api/items").send({ name: "apple" });
     expect(res.statusCode).toBe(400);
     expect(res.body).toEqual({ error: "Both name and price is required" });
   });
   test("Responds with 400 if only price is missing", async () => {
-    const res = await request(app).post("/items/api").send({ price: "2.99" });
+    const res = await request(app).post("/api/items").send({ price: "2.99" });
     expect(res.statusCode).toBe(400);
     expect(res.body).toEqual({ error: "Both name and price is required" });
   });
   test("Responds with 400 if both name and price are missing", async () => {
-    const res = await request(app).post("/items/api").send({});
+    const res = await request(app).post("/api/items").send({});
     expect(res.statusCode).toBe(400);
     expect(res.body).toEqual({ error: "Both name and price is required" });
   });
@@ -68,7 +68,7 @@ describe("POST /items/api", () => {
 describe("PATCH /items/:name/api", () => {
   test("Updating an item's name", async () => {
     const res = await request(app)
-      .patch(`/items/api/${pickles.name}`)
+      .patch(`/api/items/${pickles.name}`)
       .send({ name: "cucumbers" });
 
     expect(res.statusCode).toBe(200);
@@ -79,7 +79,7 @@ describe("PATCH /items/:name/api", () => {
 
   test("Updating an item's price", async () => {
     const res = await request(app)
-      .patch(`/items/api/${pickles.name}`)
+      .patch(`/api/items/${pickles.name}`)
       .send({ price: "5.99" });
 
     expect(res.statusCode).toBe(200);
@@ -90,7 +90,7 @@ describe("PATCH /items/:name/api", () => {
 
   test("Updating an item's name and price", async () => {
     const res = await request(app)
-      .patch(`/items/api/${pickles.name}`)
+      .patch(`/api/items/${pickles.name}`)
       .send({ name: "cucumbers", price: "5.99" });
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual({
@@ -99,7 +99,7 @@ describe("PATCH /items/:name/api", () => {
   });
 
   test("Responds with 400 if both name and price are missing", async () => {
-    const res = await request(app).patch(`/items/api/${pickles.name}`).send({});
+    const res = await request(app).patch(`/api/items/${pickles.name}`).send({});
     expect(res.statusCode).toBe(400);
     expect(res.body).toEqual({
       error: "Please input an updated name and price",
@@ -108,7 +108,7 @@ describe("PATCH /items/:name/api", () => {
 
   test("Responds with 404 if name is invalid", async () => {
     const res = await request(app)
-      .patch(`/items/api/fish`)
+      .patch(`/api/items/fish`)
       .send({ name: "salmon" });
     expect(res.statusCode).toBe(404);
     expect(res.body).toEqual({ error: "Item not found" });
@@ -117,12 +117,12 @@ describe("PATCH /items/:name/api", () => {
 
 describe("DELETE /items/api/:name", () => {
   test("Deleting an item", async () => {
-    const res = await request(app).delete(`/items/api/${pickles.name}`);
+    const res = await request(app).delete(`/api/items/${pickles.name}`);
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual({ message: "Deleted" });
   });
   test("Responds with 404 for deleting invalid name", async () => {
-    const res = await request(app).delete("/items/api/eggs");
+    const res = await request(app).delete("/api/items/eggs");
     expect(res.statusCode).toBe(404);
     expect(res.body).toEqual({ error: "Item not found" });
   });
