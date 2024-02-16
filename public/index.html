@@ -8,7 +8,8 @@
   </head>
   <body>
     <h1>Shopping List</h1>
-    <div id="form_div">
+    <div id="add_form_div">
+      <h3>Add items and their prices here</h3>
       <form action="#" method="POST" id="add_item_form">
         <label for="item_name">Name: </label>
         <input type="text" id="item_name" name="item_name" required />
@@ -17,8 +18,37 @@
         <button type="submit" id="add_item_button">Add Item</button>
       </form>
     </div>
-    <div class="shooping_list_div">
+    <div id="error_div">
+      <p id="error_message"></p>
+    </div>
+    <div id="shopping_list_div">
       <ul id="shopping_list"></ul>
+    </div>
+    <div id="total_price_div">
+      <span>Your total is: </span>
+      <span id="total_price"></span>
+    </div>
+    <div id="update_form_div" hidden>
+      <h3 id="update_header"></h3>
+      <form action="#" method="PATCH" id="update_item_form">
+        <label for="update_item_name">Name: </label>
+        <input
+          type="text"
+          id="update_item_name"
+          name="update_item_name"
+          required
+        />
+        <label for="update_item_price">Price: </label>
+        <input
+          type="text"
+          id="update_item_price"
+          name="update_item_price"
+          required
+        />
+
+        <button type="submit" id="update_item_button">Update Item</button>
+        <button id="cancel">Cancel</button>
+      </form>
     </div>
     <script src="https://unpkg.com/jquery"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>

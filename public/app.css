@@ -1,11 +1,38 @@
+body {
+  background-color: lightgreen;
+}
+
+h1 {
+  color: tan;
+}
+
 li {
   margin-bottom: 10px;
 }
 
 #delete {
   margin: 5px;
+  border: solid;
+  border-radius: 10px;
+  border-color: black;
+  color: white;
+  background-color: lightcoral;
 }
 
 #patch {
   margin: 5px;
+  border: solid;
+  border-radius: 10px;
+  border-color: black;
+  color: white;
+  background-color: cyan;
+}
+
+#error_message {
+  color: red;
+  font-weight: bold;
+}
+
+#total_price {
+  font-weight: bold;
 }
