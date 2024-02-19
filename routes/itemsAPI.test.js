@@ -3,20 +3,20 @@ process.env.NODE_ENV = "test";
 const request = require("supertest");
 
 const app = require("../app");
-const middleware = require("../middleware");
-global.items = middleware.readList();
+const fileHandle = require("../fileHandle");
+global.items = fileHandle.readList();
 
 let pickles = { name: "pickles", price: "6.99" };
 
 beforeEach(function () {
   items.length = 0;
   items.push(pickles);
-  middleware.writeList(items);
+  fileHandle.writeList(items);
 });
 
 afterEach(function () {
   items.length = 0;
-  middleware.writeList(items);
+  fileHandle.writeList(items);
 });
 
 describe("GET /api/items", () => {

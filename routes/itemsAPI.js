@@ -1,8 +1,8 @@
 const express = require("express");
 const router = new express.Router();
-const middleware = require("../middleware");
+const fileHandle = require("../fileHandle");
 const ExpressError = require("../expressError");
-global.items = middleware.readList();
+global.items = fileHandle.readList();
 
 router.get("/", function (req, res) {
   res.json({ items });
@@ -24,7 +24,7 @@ router.post("/", function (req, res, next) {
     const newItem = { name: req.body.name, price: req.body.price };
     items.push(newItem);
 
-    middleware.writeList(items);
+    fileHandle.writeList(items);
     res.status(201).json({ added: newItem });
   } catch (e) {
     return next(e);
@@ -45,7 +45,7 @@ router.patch("/:name", function (req, res) {
   if (req.body.price) {
     foundItem.price = req.body.price;
   }
-  middleware.writeList(items);
+  fileHandle.writeList(items);
   res.json({ updated: foundItem });
 });
 
@@ -55,7 +55,7 @@ router.delete("/:name", function (req, res) {
     throw new ExpressError("Item not found", 404);
   }
   items.splice(foundItem, 1);
-  middleware.writeList(items);
+  fileHandle.writeList(items);
   res.json({ message: "Deleted" });
 });
 
