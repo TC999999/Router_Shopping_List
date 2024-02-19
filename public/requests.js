@@ -25,10 +25,16 @@ async function fillList() {
   let total = 0;
   if (res.data.items.length !== 0) {
     for (let item of res.data.items) {
+      let name = item.name.replace(/_/g, " ");
+      let nameArr = name.split(" ");
+      let capNameArr = nameArr.map((word) => {
+        return word[0].toUpperCase() + word.substr(1);
+      });
+      let newName = capNameArr.join(" ");
       let $newUpdateButton = $('<button id="patch">').text("update item");
       let $newDelButton = $('<button id="delete">').text("delete item");
       let $newItem = $(`<li item_name=${item.name}>`).text(
-        `${item.name} - $${item.price}`
+        `${newName} - $${item.price}`
       );
       total += parseFloat(item.price);
       $newItem.append($newDelButton);
@@ -56,7 +62,7 @@ $(document).ready(function () {
 
 $addButton.on("click", async function (e) {
   e.preventDefault();
-  let $name = $itemName.val();
+  let $name = $itemName.val().toLowerCase().replace(/\s+/g, "_");
   let $price = $itemPrice.val();
   if (!$name || !$price) {
     $errorMessage.text("Please fill out both inputs");
@@ -70,6 +76,8 @@ $addButton.on("click", async function (e) {
       setTimeout(() => {
         $errorMessage.text("");
       }, 2000);
+      $itemName.val("");
+      $itemPrice.val("");
     } catch (err) {
       await axios.post(baseURL, { name: $name, price: $price });
       $shoppingList.empty();
