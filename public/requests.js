@@ -119,7 +119,7 @@ $cancel.on("click", function (e) {
 
 $updateButton.on("click", async function (e) {
   e.preventDefault();
-  let newName = $updateItemName.val();
+  let newName = $updateItemName.val().toLowerCase().replace(/\s+/g, "_");
   let newPrice = $updateItemPrice.val();
   if (!newName) {
     await axios.patch(`${baseURL}/${currentItem.name}`, {
